@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import axios from 'axios';
+
 import { IS_DEV } from '../../utils/envUtils';
 
 import { DEV_URL, PROD_URL } from '../../utils/urls';
@@ -20,9 +20,8 @@ const LandingPage = () => {
       IS_DEV ? DEV_URL : PROD_URL,
       REQUEST_METHOD.GET
     );
-      
-     principlesPromise.then(principles => setPrinciples(principles.data));
-      
+
+    principlesPromise.then((principles) => setPrinciples(principles.data));
   }, []);
 
   if (!principles) return <div>Loading...</div>;
