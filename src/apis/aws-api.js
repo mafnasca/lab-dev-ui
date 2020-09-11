@@ -1,27 +1,16 @@
 import axios from 'axios';
 
-import {
-    IS_DEV
-} from '../utils/envUtils';
+import { IS_DEV } from '../utils/envUtils';
 
-import {
-    DEV_URL,
-    PROD_URL
-} from '../utils/urls';
+import { DEV_URL, PROD_URL } from '../utils/urls';
 
-import {
-    REQUEST_METHOD
-} from '../utils/reqMethods'; 
-
+import { REQUEST_METHOD } from '../utils/reqMethods';
 
 export const awsPrinciplesApi = (url, method, data) => {
-    switch (method) {
-        case REQUEST_METHOD.GET:
-            return axios.get(url).
-            then(data => data)
-                .catch(err => console.log(err));
-        default:
-            return;
-    }
-}
-  
+  switch (method) {
+    case REQUEST_METHOD.GET:
+      return axios.get(url);
+    default:
+      return;
+  }
+};
