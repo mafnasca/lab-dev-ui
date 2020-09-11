@@ -6,8 +6,6 @@ const PrincipleList = (props) => {
 
     const { principles } = props;
 
-    console.log(principles);
-
     if (!principles) return <div>...Loading</div>
 
     return (
@@ -15,7 +13,7 @@ const PrincipleList = (props) => {
             {
                 principles.map(principle => {
                     return (
-                        <div className='principle-container'>
+                        <div key={principle.id} className='principle-container'>
                             <div className='principle-title'>
                                 {principle.title}
                             </div>

@@ -1,43 +1,38 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import {
-    IS_DEV
-} from '../../utils/envUtils';
+import { IS_DEV } from '../../utils/envUtils';
 
-import {
-    DEV_URL,
-    PROD_URL
-} from '../../utils/urls';
+import { DEV_URL, PROD_URL } from '../../utils/urls';
 
-import PrincipleList from '../PrincipleList'; 
+import { awsPrinciplesApi } from '../../apis/aws-api';
 
-import './style.scss'; 
+import { REQUEST_METHOD } from '../../utils/reqMethods';
+
+import PrincipleList from '../PrincipleList';
+
+import './style.scss';
 
 const LandingPage = () => {
+  const [principles, setPrinciples] = useState([]);
 
-    const [principles, setPrinciples] = useState([])
+  useEffect(() => {
+    const principlesPromise = awsPrinciplesApi(
+      IS_DEV ? DEV_URL : PROD_URL,
+      REQUEST_METHOD.GET
+    );
+      
+     principlesPromise.then(principles => setPrinciples(principles.data));
+      
+  }, []);
 
-    const getAllPriniciples = () => {
-        return axios.get(IS_DEV ? DEV_URL : PROD_URL)
-            .then(principles => setPrinciples(principles.data)).catch(err => console.log(err));
-    }
+  if (!principles) return <div>Loading...</div>;
 
-    useEffect(() => {
-        getAllPriniciples();
-    }, [])
+  return (
+    <div className='LandingPage'>
+      <header className='title-banner'> AWS Leadership Principles</header>
+      <PrincipleList principles={principles}></PrincipleList>
+    </div>
+  );
+};
 
-    if (!principles) return <div>Loading...</div>
-
-    return (
-        <div className='LandingPage'>
-            <header className='title-banner'> AWS Leadership Principles</header>
-            <PrincipleList
-                principles={principles}
-            >
-            </PrincipleList>
-        </div>
-    )
-
-}
-
-export default LandingPage; 
+export default LandingPage;

@@ -9,11 +9,19 @@ import {
     PROD_URL
 } from '../utils/urls';
 
-export const getAllUsers = () => {
+import {
+    REQUEST_METHOD
+} from '../utils/reqMethods'; 
 
-    const users = axios.get(IS_DEV ? DEV_URL : PROD_URL)
-        .then(data => data).catch(err => console.log(err));
 
-    return users.data;
-
+export const awsPrinciplesApi = (url, method, data) => {
+    switch (method) {
+        case REQUEST_METHOD.GET:
+            return axios.get(url).
+            then(data => data)
+                .catch(err => console.log(err));
+        default:
+            return;
+    }
 }
+  
