@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { IS_DEV } from '../../utils/envUtils';
 
@@ -28,7 +28,7 @@ const LandingPage = () => {
 
   return (
     <div className='LandingPage'>
-      <header className='title-banner'> AWS Leadership Principles</header>
+      <header className='title-banner'>AWS Leadership Principles</header>
       <PrincipleList principles={principles}></PrincipleList>
     </div>
   );
